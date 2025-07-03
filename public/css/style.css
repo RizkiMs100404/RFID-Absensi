@@ -1,0 +1,193 @@
+/* Reset dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body, html {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #000;
+  color: #fff;
+  scroll-behavior: smooth;
+}
+
+/* Header */
+.header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  padding: 20px 50px;
+  background: transparent;
+}
+
+/* Header Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Kiri: Logo + Brand */
+.left {
+  display: flex;
+  align-items: center;
+  animation: fadeSlideLeft 1s ease-out forwards;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.brand {
+  font-size: 20px;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Kanan: Menu Navigasi */
+.nav {
+  display: flex;
+  gap: 20px;
+  animation: fadeSlideRight 1s ease-out forwards;
+}
+
+.nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav a:hover {
+  color: #f44336;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  background: url('../images/bg.jpg') no-repeat center center/cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Overlay */
+.overlay {
+  background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85));
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  text-align: center;
+  animation: fadeInOverlay 1.5s ease-in forwards;
+}
+
+/* Hero Content */
+.overlay h5 {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #ccc;
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.2s;
+  text-transform: uppercase;
+}
+
+.overlay h1 {
+  font-size: 42px;
+  font-weight: bold;
+  margin: 10px 0;
+  line-height: 1.3;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.4s;
+}
+
+.overlay h4 {
+  color: rgb(194, 1, 1);
+  letter-spacing: 3px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-size: 18px;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.6s;
+}
+
+.info-rfid {
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto 25px;
+  color: #e0e0e0;
+  text-align: center;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.75s;
+}
+/* Tombol CTA */
+.btn {
+  background-color:  #b69b00;
+  padding: 12px 30px;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 1s;
+}
+
+.btn:hover {
+  background-color: #c00000;
+}
+
+/* Animasi */
+@keyframes fadeSlideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeSlideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInOverlay {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

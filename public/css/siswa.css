@@ -1,0 +1,140 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(to right top, #1e1e2f, #2c2f5e);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(255,255,255,0.1);
+  padding: 30px 20px;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.sidebar h2 {
+  text-align: center;
+  color: #00ffd5;
+  margin-bottom: 40px;
+}
+
+.sidebar a {
+  display: block;
+  color: #ccc;
+  margin-bottom: 25px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #00ffd5;
+  transform: translateX(8px);
+}
+
+.main {
+  margin-left: 260px;
+  padding: 50px;
+  width: 100%;
+  animation: fadeIn 1s ease;
+}
+
+.main h1 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #00ffd5;
+}
+
+table {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+  animation: fadeInUp 1.2s ease;
+}
+
+th, td {
+  padding: 16px 24px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+th {
+  background: rgba(0, 0, 0, 0.3);
+  color: #00ffd5;
+}
+
+td {
+  color: #f0f0f0;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.edit-btn {
+  background-color: #00c4b4;
+  color: #fff;
+}
+
+.delete-btn {
+  background-color: #ff5c5c;
+  color: #fff;
+}
+
+.edit-btn:hover {
+  background-color: #00a89c;
+}
+
+.delete-btn:hover {
+  background-color: #e04e4e;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .main {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .sidebar {
+    display: none;
+  }
+}

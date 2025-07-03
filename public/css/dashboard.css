@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(to right top, #1e1e2f, #2c2f5e);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(255,255,255,0.1);
+  padding: 30px 20px;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.sidebar h2 {
+  text-align: center;
+  color: #00ffd5;
+  margin-bottom: 40px;
+}
+
+.sidebar a {
+  display: block;
+  color: #ccc;
+  margin-bottom: 25px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #00ffd5;
+  transform: translateX(8px);
+}
+
+.main {
+  margin-left: 260px;
+  padding: 50px;
+  width: 100%;
+  animation: fadeIn 1s ease;
+}
+
+.main h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.stats {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: linear-gradient(145deg, #2a2a3f, #1d1d30);
+  flex: 1;
+  min-width: 200px;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 10px 10px 30px #161622, -10px -10px 30px #2c2c42;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 10px 15px 40px #121220, -5px -5px 30px #3a3a5c;
+}
+
+.card h3 {
+  font-size: 18px;
+  color: #ddd;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 32px;
+  font-weight: bold;
+  color: #00ffd5;
+}
+
+table {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+  animation: fadeInUp 1.2s ease;
+}
+
+th, td {
+  padding: 16px 24px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+th {
+  background: rgba(0, 0, 0, 0.3);
+  color: #00ffd5;
+}
+
+.status-hadir {
+  color: #00ff99;
+  font-weight: bold;
+}
+
+.status-telat {
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .main {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .sidebar {
+    display: none;
+  }
+}
