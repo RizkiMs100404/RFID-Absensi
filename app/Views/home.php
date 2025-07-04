@@ -5,9 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RFID CLASS A</title>
+  <link rel="shortcut icon" href="<?= base_url('images/logo.png') ?>" type="image/x-icon">
   <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
+
 <body>
 
   <?= view('components/header') ?>
@@ -22,6 +24,7 @@
       <p class="info-rfid">
         Sistem ini dilengkapi dengan fitur absensi otomatis menggunakan teknologi RFID yang akurat dan efisien.
       </p>
+      
 <br>
       <a href="<?= base_url('login') ?>" class="btn">Get Started</a>
     </div>

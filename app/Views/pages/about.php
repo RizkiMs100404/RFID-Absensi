@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Tentang Sistem RFID</title>
+  <link rel="shortcut icon" href="<?= base_url('images/logo.png') ?>" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?= base_url('css/about.css') ?>">
   <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">

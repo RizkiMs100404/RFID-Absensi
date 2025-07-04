@@ -15,3 +15,8 @@ $routes->get('gallery', 'Page::gallery');
 $routes->get('guide', 'Page::guide');
 $routes->get('/admin/dashboard', 'Admin::dashboard');
 $routes->get('/admin/siswa', 'Admin::siswa');
+
+$routes->post('/auth/set-session', 'Admin::setSession');
+$routes->get('/testing', 'Page::testing');
+
+$routes->get('/logout', 'Admin::logout');

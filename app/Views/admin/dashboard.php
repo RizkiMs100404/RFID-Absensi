@@ -8,13 +8,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="<?= base_url('css/dashboard.css') ?>">
 </head>
+<?php 
+  $userData = session('userData');
+?>
 <body>
 
   <div class="sidebar">
-    <h2>Admin RFID</h2>
+    <h2><?php echo $userData['nama'] ?></h2>
     <a href="<?= base_url('/admin/dashboard') ?>"><i class="fas fa-chart-line"></i> Dashboard</a>
     <a href="<?= base_url('/admin/siswa') ?>"><i class="fas fa-users"></i> Kelola Siswa</a>
-    <a href="<?= base_url('/login') ?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    <a href="<?= base_url('/logout') ?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
   </div>
 
   <div class="main">
@@ -26,8 +29,8 @@
         <p>120</p>
       </div>
       <div class="card">
-        <h3>Hadir Hari Ini</h3>
-        <p>98</p>
+        <h3>Total Siswa</h3>
+        <p>120</p>
       </div>
       <div class="card">
         <h3>Telat</h3>

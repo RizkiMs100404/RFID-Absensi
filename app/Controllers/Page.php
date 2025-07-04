@@ -32,4 +32,9 @@ class Page extends BaseController
     {
         return view('pages/guide');
     }
+
+    public function testing()
+    {
+        return view('pages/testing');
+    }
 }
