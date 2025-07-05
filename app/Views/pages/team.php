@@ -106,7 +106,7 @@ body {
         <p>Frontend Developer</p>
       </div>
       <div class="team-card">
-        <img src="images/#" alt="Mizan">
+        <img src="images/salman.jpg" alt="Mizan">
         <h3>Salman Al Farizi</h3>
         <p>Backend Developer</p>
       </div>

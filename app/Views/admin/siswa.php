@@ -32,7 +32,7 @@ $userData = session('userData');
   let editMode = false;
   let editNIM = null;
 
-  // Buka modal
+
   addDataBtn.addEventListener("click", () => modal.style.display = "flex");
   closeModal.addEventListener("click", () => modal.style.display = "none");
 
@@ -53,7 +53,7 @@ $userData = session('userData');
     try {
       const querySnapshot = await getDocs(collection(db, "mahasiswa"));
       let no = 1;
-      tableBody.innerHTML = ""; // Kosongkan isi tabel
+      tableBody.innerHTML = "";
 
       querySnapshot.forEach((docSnap) => {
         const data = docSnap.data();
@@ -92,7 +92,6 @@ $userData = session('userData');
             if (docSnap.exists()) {
               const data = docSnap.data();
 
-              // Isi form dengan data
               form.nim.value = data.nim;
               form.nama.value = data.nama;
               form.kelas.value = data.kelas;
@@ -101,7 +100,7 @@ $userData = session('userData');
               // Set edit mode
               editMode = true;
               editNIM = nim;
-              form.nim.disabled = true; // NIM tidak boleh diubah saat edit
+              form.nim.disabled = false; // NIM tidak boleh diubah saat edit
 
               modal.style.display = "flex";
             } else {
@@ -123,19 +122,33 @@ $userData = session('userData');
   form.addEventListener("submit", async function(e) {
     e.preventDefault();
 
-    const nim = form.nim.value.trim();
+    const nimInput = form.nim.value.trim();
     const nama = form.nama.value.trim();
     const kelas = form.kelas.value.trim();
     const rfid_user = form.rfid_user.value.trim();
 
-    if (!nim || !nama || !kelas) {
+    if (!nimInput || !nama || !kelas) {
       alert("Semua field wajib diisi!");
       return;
     }
 
     try {
-      await setDoc(doc(db, "mahasiswa", nim), {
-        nim,
+      if (!editMode) {
+        const existingDoc = await getDoc(doc(db, "mahasiswa", nimInput));
+        if (existingDoc.exists()) {
+          alert("NIM sudah terdaftar. Gunakan NIM lain.");
+          return;
+        }
+      }
+
+      // Jika edit dan NIM diganti, hapus dokumen lama
+      if (editMode && editNIM !== nimInput) {
+        await deleteDoc(doc(db, "mahasiswa", editNIM));
+      }
+
+      // Simpan data baru
+      await setDoc(doc(db, "mahasiswa", nimInput), {
+        nim: nimInput,
         nama,
         kelas,
         rfid_user
@@ -148,12 +161,12 @@ $userData = session('userData');
       editMode = false;
       editNIM = null;
       loadSiswa();
+
     } catch (err) {
       console.error("Gagal menyimpan data:", err);
       alert("Terjadi kesalahan saat menyimpan data.");
     }
   });
-
 
   loadSiswa();
 </script>
