@@ -109,16 +109,28 @@
     <div class="gallery-grid">
       <!-- Tambahkan gambar sesuai kebutuhan -->
       <div class="gallery-card">
-        <img src="images/rfid1.jpg" alt="RFID 1">
+        <img src="images/g1.jpg" alt="RFID 1">
       </div>
       <div class="gallery-card">
-        <img src="images/rfid2.jpg" alt="RFID 2">
+        <img src="images/g2.jpg" alt="RFID 2">
       </div>
       <div class="gallery-card">
-        <img src="images/rfid3.jpg" alt="RFID 3">
+        <img src="images/g3.jpg" alt="RFID 3">
       </div>
       <div class="gallery-card">
-        <img src="images/rfid4.jpg" alt="RFID 4">
+        <img src="images/g4.jpg" alt="RFID 4">
+      </div>
+            <div class="gallery-card">
+        <img src="images/g5.jpg" alt="RFID 1">
+      </div>
+      <div class="gallery-card">
+        <img src="images/g6.jpg" alt="RFID 2">
+      </div>
+      <div class="gallery-card">
+        <img src="images/g7.jpg" alt="RFID 3">
+      </div>
+      <div class="gallery-card">
+        <img src="images/g8.jpg" alt="RFID 4">
       </div>
       <!-- Tambahkan lebih banyak jika diperlukan -->
     </div>

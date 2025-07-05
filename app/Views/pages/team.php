@@ -98,82 +98,159 @@ body {
 <body>
      <?= view('components/header') ?>
   <section class="team-section">
-    <h1>Team Development</h1>
+    <h1>TEAM DEVELOPMENT</h1>
     <div class="team-grid">
       <div class="team-card">
-        <img src="images/rizky.jpg" alt="Rizky">
-        <h3>Rizky</h3>
-        <p>MC</p>
+        <img src="images/mizan.jpeg" alt="Rizky">
+        <h3>Mizan Nurhakim</h3>
+        <p>Frontend Developer</p>
       </div>
       <div class="team-card">
-        <img src="images/mizan.jpg" alt="Mizan">
-        <h3>Mizan</h3>
-        <p>NPC</p>
+        <img src="images/#" alt="Mizan">
+        <h3>Salman Al Farizi</h3>
+        <p>Backend Developer</p>
       </div>
-      <div class="team-card">
-        <img src="images/salman.jpg" alt="Salman">
-        <h3>Salman</h3>
-        <p>NPC</p>
-      </div>
-      <div class="team-card">
-        <img src="images/arman.jpg" alt="Arman">
-        <h3>Arman</h3>
-        <p>NPC</p>
-      </div>
-    </div>
-
   </section>
+
     <section class="team-section">
-    <h1>Team Laporan</h1>
+    <h1>TEAM IOT ENGGINER</h1>
     <div class="team-grid">
       <div class="team-card">
-        <img src="images/rizky.jpg" alt="Rizky">
-        <h3>Rizky</h3>
-        <p>MC - Master Coder</p>
+        <img src="images/ikiw.jpg" alt="Rizky">
+        <h3>Rizki Mustofa</h3>
+        <p>Engginer 1</p>
       </div>
       <div class="team-card">
-        <img src="images/mizan.jpg" alt="Mizan">
-        <h3>Mizan</h3>
-        <p>NPC - UI/UX Designer</p>
+        <img src="images/arman.jpg" alt="Mizan">
+        <h3>Arman Hardiansyah</h3>
+        <p>Engginer 2</p>
       </div>
       <div class="team-card">
-        <img src="images/salman.jpg" alt="Salman">
-        <h3>Salman</h3>
-        <p>NPC - Backend Developer</p>
+        <img src="images/Zidan.jpg" alt="Salman">
+        <h3>Zidan Gunawan</h3>
+        <p>Engginer 3</p>
       </div>
       <div class="team-card">
-        <img src="images/arman.jpg" alt="Arman">
-        <h3>Arman</h3>
-        <p>NPC - Integrator</p>
+        <img src="images/sultan.jpeg" alt="Arman">
+        <h3>Sultan Moch Nabawi S</h3>
+        <p>Engginer 4</p>
+      </div>
+            <div class="team-card">
+        <img src="images/aqil.png" alt="Arman">
+        <h3>M Aqil Safaat Nugraha</h3>
+        <p>Engginer 5</p>
       </div>
     </div>
   </section>
 
    <section class="team-section">
-    <h1>Team Dokumentasi</h1>
+    <h1>TEAM REPORT</h1>
     <div class="team-grid">
       <div class="team-card">
-        <img src="images/rizky.jpg" alt="Rizky">
-        <h3>Rizky</h3>
-        <p>MC - Master Coder</p>
+        <img src="images/vina.jpg" alt="Rizky">
+        <h3>Vina Septia Anggraeni</h3>
+        <p>Laporan 1</p>
       </div>
       <div class="team-card">
-        <img src="images/mizan.jpg" alt="Mizan">
-        <h3>Mizan</h3>
-        <p>NPC - UI/UX Designer</p>
+        <img src="images/risna.jpg" alt="Mizan">
+        <h3>Risna Adhatiyah</h3>
+        <p>Laporan 2</p>
       </div>
       <div class="team-card">
-        <img src="images/salman.jpg" alt="Salman">
-        <h3>Salman</h3>
-        <p>NPC - Backend Developer</p>
+        <img src="images/Amel.jpg" alt="Salman">
+        <h3>Amelia Mutiara Rahmani</h3>
+        <p>Laporan 3</p>
       </div>
       <div class="team-card">
-        <img src="images/arman.jpg" alt="Arman">
-        <h3>Arman</h3>
-        <p>NPC - Integrator</p>
+        <img src="images/nida.jpg" alt="Arman">
+        <h3>Neng Nida Nurfadilah</h3>
+        <p>Laporan 4</p>
       </div>
-    </div>
+      <div class="team-card">
+        <img src="images/hilda.jpeg" alt="Arman">
+        <h3>Hilda Nur Apriliani</h3>
+        <p>Laporan 5</p>
+      </div>
+            <div class="team-card">
+        <img src="images/alif.jpg" alt="Arman">
+        <h3>Alif Febrianto</h3>
+        <p>Laporan 6</p>
+      </div>
+                  <div class="team-card">
+        <img src="images/nisa.jpg" alt="Arman">
+        <h3>An nisa Tri Syahti</h3>
+        <p>Laporan 7</p>
+      </div>
+      <div class="team-card">
+        <img src="images/rina.jpeg" alt="Arman">
+        <h3>Rina Rahmawijaya</h3>
+        <p>Laporan 8</p>
+      </div>
+            <div class="team-card">
+        <img src="images/Billy.png" alt="Arman">
+        <h3>Billy Ababhil</h3>
+        <p>Laporan 9</p>
+      </div>
+      <div class="team-card">
+        <img src="images/ijal.jpeg" alt="Mizan">
+        <h3>Faizal Ersa Alfarobi </h3>
+        <p>Laporan 10</p>
+      </div>
+      <div class="team-card">
+        <img src="images/Exal.jpg" alt="Salman">
+        <h3>Mochammad Exal Alrasyid</h3>
+        <p>Laporan 11</p>
+      </div>
   </section>
+
+      <section class="team-section">
+    <h1>TEAM DEMONSTRATION</h1>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="images/Fikri.png" alt="Rizky">
+        <h3>Fikri Darojatul Ilmi</h3>
+        <p>Demonstrasi 1</p>
+      </div>
+      <div class="team-card">
+        <img src="images/septa.jpeg" alt="Mizan">
+        <h3>Septa Maulana</h3>
+        <p>Demonstrasi 2</p>
+      </div>
+  </section>
+
+    <section class="team-section">
+    <h1>TEAM DOKUMENTATION</h1>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="images/Galih.jpg" alt="Rizky">
+        <h3>⁠Galih Restu CP</h3>
+        <p>PDD 1</p>
+      </div>
+      <div class="team-card">
+        <img src="images/san.jpg" alt="Mizan">
+        <h3>M Rikshandi Jibriela</h3>
+        <p>PDD 2</p>
+      </div>
+          <div class="team-grid">
+      <div class="team-card">
+        <img src="images/Tyas.jpg" alt="Rizky">
+        <h3>Tyas Sri Rahayu</h3>
+        <p>PDD 3</p>
+      </div>
+      <div class="team-card">
+        <img src="images/nazar.cr2" alt="Mizan">
+        <h3>Nazar Nurhilman</h3>
+        <p>PDD 4</p>
+      </div>
+          <div class="team-grid">
+      <div class="team-card">
+        <img src="images/nurul.jpg" alt="Rizky">
+        <h3>Nurul Kiftiyah</h3>
+        <p>PDD 5</p>
+      </div>
+
+  </section>
+
 
 </body>
 </html>
