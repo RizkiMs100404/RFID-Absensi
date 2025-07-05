@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Login - RFID</title>
@@ -13,15 +14,15 @@
 
 <script type="module">
   import {
-  auth,
-  signInWithEmailAndPassword,
-  db,
-  doc,
-  getDoc
-} from './firebase/firebase.js';
+    auth,
+    signInWithEmailAndPassword,
+    db,
+    doc,
+    getDoc
+  } from './firebase/firebase.js';
 
 
-  document.querySelector('.btn-login').addEventListener('click', async function (e) {
+  document.querySelector('.btn-login').addEventListener('click', async function(e) {
     e.preventDefault();
 
     const email = document.getElementById('email').value;
@@ -38,23 +39,22 @@
 
       if (docSnap.exists()) {
         const userData = docSnap.data();
-        
-        // Kirim ke backend agar disimpan di PHP session
-await fetch("<?= base_url('/auth/set-session') ?>", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(userData)
-})
-.then(res => res.json())
-.then(res => {
-  if (res.status === 'success') {
-    window.location.href = "<?= base_url('admin/dashboard') ?>";
-  } else {
-    alert("Gagal menyimpan session di server.");
-  }
-});
+
+        await fetch("<?= base_url('/auth/set-session') ?>", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
+          })
+          .then(res => res.json())
+          .then(res => {
+            if (res.status === 'success') {
+              window.location.href = "<?= base_url('admin/dashboard') ?>";
+            } else {
+              alert("Gagal menyimpan session di server.");
+            }
+          });
 
         window.location.href = "<?= base_url('admin/dashboard') ?>";
       } else {
@@ -67,7 +67,8 @@ await fetch("<?= base_url('/auth/set-session') ?>", {
 </script>
 
 <body>
-    <?= view('components/header') ?>
+  <?= view('components/header') ?>
+  <?= view('components/alert') ?>
   <div class="login-container">
     <div class="login-card">
       <h2>Silakan login</h2>
@@ -86,4 +87,5 @@ await fetch("<?= base_url('/auth/set-session') ?>", {
     </div>
   </div>
 </body>
+
 </html>

@@ -20,3 +20,5 @@ $routes->post('/auth/set-session', 'Admin::setSession');
 $routes->get('/testing', 'Page::testing');
 
 $routes->get('/logout', 'Admin::logout');
+
+$routes->get('pages/testing', 'Page::testing');

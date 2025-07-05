@@ -8,43 +8,53 @@ class Admin extends BaseController
     {
         $userData = session('userData');
 
-        if ($userData['is_login'] == 'true') {
-            return view('admin/dashboard');
-        } else {
-            return view('login');
+        if (!isset($userData['is_login']) || $userData['is_login'] !== true) {
+            return redirect()->to('login');
         }
-        
+
+        return view('admin/dashboard');
     }
-        public function siswa()
+
+    public function siswa()
     {
         return view('admin/siswa');
     }
 
     public function setSession()
-{
-    $json = $this->request->getJSON(true);
+    {
+        $json = $this->request->getJSON(true);
 
-    if ($json) {
-        // Siapkan struktur data session
-        $sessionData = [
-            'uid'       => $json['uid'] ?? null,
-            'nama'      => $json['nama'] ?? '',
-            'nim'       => $json['nim'] ?? '',
-            'email'     => $json['email'] ?? '',
-            'role'      => $json['role'] ?? 'user',
-            'is_login'  => true
-        ];
+        if ($json) {
+            $sessionData = [
+                'uid'       => $json['uid'] ?? null,
+                'nama'      => $json['nama'] ?? '',
+                'nim'       => $json['nim'] ?? '',
+                'email'     => $json['email'] ?? '',
+                'role'      => $json['role'] ?? 'user',
+                'is_login'  => true
+            ];
 
-        session()->set('userData', $sessionData);
+            session()->set('userData', $sessionData);
 
-        return $this->response->setJSON(['status' => 'success', 'session' => $sessionData]);
+            session()->setFlashdata('alert', [
+                'type' => 'success',
+                'message' => 'Anda berhasil login.'
+            ]);
+
+            return $this->response->setJSON(['status' => 'success', 'session' => $sessionData]);
+        }
+
+        return $this->response->setJSON(['status' => 'failed']);
     }
 
-    return $this->response->setJSON(['status' => 'failed']);
-    }
+    public function logout()
+    {
+        session()->setFlashdata('alert', [
+            'type' => 'success',
+            'message' => 'Anda telah logout.'
+        ]);
 
-    public function logout() {
-        session()->destroy();
+        session()->remove('userData');
 
         return redirect()->to('login');
     }

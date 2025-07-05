@@ -109,7 +109,6 @@
 </head>
 <body>
   <?= view('components/header') ?>
-  
   <section class="guide-section">
     <h1>Panduan Penggunaan</h1>
     <ol class="guide-steps">

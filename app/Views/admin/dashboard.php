@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <title>Dashboard Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="<?= base_url('css/dashboard.css') ?>">
 </head>
-<?php 
-  $userData = session('userData');
+<?php
+$userData = session('userData');
 ?>
-<body>
 
+<script type="module">
+  import {
+    db,
+    collection,
+    getDocs
+  } from "<?= base_url('./firebase/firebase.js') ?>";
+
+  async function loadTotalSiswa() {
+    try {
+      const querySnapshot = await getDocs(collection(db, "mahasiswa"));
+      const total = querySnapshot.size; // Jumlah dokumen
+      document.getElementById("total-siswa").textContent = total;
+    } catch (err) {
+      console.error("Gagal mengambil data total siswa:", err);
+    }
+  }
+
+  // Panggil fungsi saat halaman dimuat
+  loadTotalSiswa();
+</script>
+
+
+<body>
+  <?= view('components/alert') ?>
+  
   <div class="sidebar">
     <h2><?php echo $userData['nama'] ?></h2>
     <a href="<?= base_url('/admin/dashboard') ?>"><i class="fas fa-chart-line"></i> Dashboard</a>
@@ -26,11 +52,11 @@
     <div class="stats">
       <div class="card">
         <h3>Total Siswa</h3>
-        <p>120</p>
+        <p id="total-siswa">0</p>
       </div>
       <div class="card">
-        <h3>Total Siswa</h3>
-        <p>120</p>
+        <h3>Total Siswa Hadir</h3>
+        <p>3</p>
       </div>
       <div class="card">
         <h3>Telat</h3>
@@ -68,4 +94,5 @@
   </div>
 
 </body>
+
 </html>

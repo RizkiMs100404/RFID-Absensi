@@ -102,7 +102,6 @@
 </head>
 <body>
   <?= view('components/header') ?>
-  
   <section class="gallery-section">
     <h1>Album Kelas A</h1>
     <p>Lihat dokumentasi proses pembuatan sistem RFID dan implementasinya di lapanganya.</p>

@@ -1,7 +1,7 @@
 // public/firebase/firebase.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc, getDocs, deleteDoc, setDoc, collection } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAxZ1MMOqH-c6fFTVqXCS0FChrGE_5I6Mg",
@@ -17,4 +17,4 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-export { auth, signInWithEmailAndPassword, db, doc, getDoc };
+export { auth, signInWithEmailAndPassword, db, doc, getDoc, setDoc, getDocs, deleteDoc, collection };
