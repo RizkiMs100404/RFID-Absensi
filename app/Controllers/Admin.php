@@ -6,11 +6,11 @@ class Admin extends BaseController
 {
     public function dashboard()
     {
-        $userData = session('userData');
+        // $userData = session('userData');
 
-        if (!isset($userData['is_login']) || $userData['is_login'] !== true) {
-            return redirect()->to('login');
-        }
+        // if (!isset($userData['is_login']) || $userData['is_login'] !== true) {
+        //     return redirect()->to('login');
+        // }
 
         return view('admin/dashboard');
     }

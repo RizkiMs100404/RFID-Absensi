@@ -24,6 +24,8 @@
     where,
     updateDoc,
     getDoc,
+    writeBatch,
+    onSnapshot
   } from "<?= base_url('./firebase/firebase.js') ?>";
 
   function getWaktuWIB() {
@@ -35,6 +37,53 @@
     const min = String(now.getMinutes()).padStart(2, '0');
     const ss = String(now.getSeconds()).padStart(2, '0');
     return `${yyyy}-${mm}-${dd}T${hh}:${min}:${ss}`;
+  }
+
+  // Tambahkan fungsi baru ini di dalam tag <script type="module"> Anda
+
+  async function siapkanDokumenAbsensi(tanggal) {
+    try {
+      // Ambil semua data mahasiswa
+      const mahasiswaSnapshot = await getDocs(collection(db, "mahasiswa"));
+
+      // Ambil semua data absensi yang sudah ada pada tanggal tersebut
+      const q = query(collection(db, "absensi"), where("tanggal", "==", tanggal));
+      const absensiSnapshot = await getDocs(q);
+      const nimYangSudahAbsen = new Set(absensiSnapshot.docs.map(doc => doc.data().nim));
+
+      // Siapkan batch write untuk efisiensi
+      const batch = writeBatch(db);
+      let perluCommit = false;
+
+      // Loop semua mahasiswa untuk memeriksa siapa yang belum punya dokumen absensi
+      mahasiswaSnapshot.forEach(mhsDoc => {
+        const nim = mhsDoc.id; // Asumsi ID dokumen mahasiswa adalah NIM
+        const dataMhs = mhsDoc.data();
+
+        if (!nimYangSudahAbsen.has(nim)) {
+          // Jika mahasiswa ini belum punya catatan absensi, buatkan satu
+          perluCommit = true;
+          const customDocId = `${nim}_${tanggal}`;
+          const docRef = doc(db, "absensi", customDocId);
+          batch.set(docRef, {
+            nim: nim,
+            nama: dataMhs.nama,
+            kelas: dataMhs.kelas,
+            tanggal: tanggal,
+            status: "",
+            waktu_scan: ""
+          });
+        }
+      });
+
+      // Jika ada dokumen baru yang perlu dibuat, kirim semua sekaligus
+      if (perluCommit) {
+        console.log("Membuat dokumen absensi yang kosong untuk tanggal:", tanggal);
+        await batch.commit();
+      }
+    } catch (err) {
+      console.error("Gagal menyiapkan dokumen absensi:", err);
+    }
   }
 
 
@@ -79,62 +128,75 @@
     }
   }
 
+  // Gantikan fungsi loadAbsensi Anda dengan yang ini
+  let unsubscribeAbsensi = null;
+
   async function loadAbsensi() {
     const tbody = document.querySelector("tbody");
-    tbody.innerHTML = "";
+    tbody.innerHTML = `
+    <tr>
+      <td colspan="4" class="text-center">Memuat data absensi...</td>
+    </tr>`;
 
     const filterDate = document.getElementById("filter-date").value;
     const filterStatus = document.getElementById("filter-status").value;
 
-    const mahasiswaSnapshot = await getDocs(collection(db, "mahasiswa"));
-    const absensiSnapshot = await getDocs(collection(db, "absensi"));
+    // Hapus listener sebelumnya untuk mencegah tumpukan listener
+    if (unsubscribeAbsensi) {
+      unsubscribeAbsensi();
+    }
 
-    const absensiMap = new Map();
-    absensiSnapshot.forEach(doc => {
-      const data = doc.data();
-      const key = `${data.nim}_${data.tanggal}`;
-      absensiMap.set(key, data);
-    });
+    // LANGKAH 1: Pastikan semua dokumen absensi untuk tanggal ini sudah ada.
+    // Ini adalah fungsi baru yang krusial untuk mencegah duplikasi.
+    await siapkanDokumenAbsensi(filterDate);
 
-    mahasiswaSnapshot.forEach(doc => {
-      const nim = doc.id;
-      const dataMhs = doc.data();
-      const nama = dataMhs.nama;
-      const kelas = dataMhs.kelas;
-      const key = `${nim}_${filterDate}`;
-      const absenData = absensiMap.get(key);
+    // LANGKAH 2: Setelah dokumen siap, baru pasang listener onSnapshot.
+    const absensiRef = collection(db, "absensi");
+    const q = query(absensiRef, where("tanggal", "==", filterDate));
 
-      let waktuStr = "-";
-      let status = absenData?.status || "";
+    unsubscribeAbsensi = onSnapshot(q, (snapshot) => {
+      tbody.innerHTML = ""; // Bersihkan tabel setiap kali ada update
 
-      if (absenData?.waktu_scan) {
-        const waktu = new Date(absenData.waktu_scan);
-        waktuStr = waktu.toTimeString().split(" ")[0].slice(0, 5); // Format: HH:mm
+      const absensiData = [];
+      snapshot.forEach(doc => {
+        // Filter berdasarkan status jika dipilih
+        if (!filterStatus || doc.data().status === filterStatus) {
+          absensiData.push(doc.data());
+        }
+      });
+
+      if (absensiData.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="text-center">Tidak ada data untuk ditampilkan.</td></tr>`;
+      } else {
+        absensiData.forEach(data => {
+          let waktuStr = "-";
+          if (data.waktu_scan) {
+            const waktu = new Date(data.waktu_scan);
+            waktuStr = waktu.toTimeString().split(" ")[0].slice(0, 5);
+          }
+
+          const statusOptions = ["", "Hadir", "Telat", "Tidak Hadir", "Izin", "Sakit"].map(opt => {
+            const selected = opt === data.status ? "selected" : "";
+            return `<option value="${opt}" ${selected}>${opt || "-"}</option>`;
+          }).join("");
+
+          tbody.innerHTML += `
+              <tr>
+                <td>${data.nama}</td>
+                <td>${data.kelas}</td>
+                <td>${waktuStr}</td>
+                <td>
+                  <select class="status-dropdown bg-white text-black border border-gray-300 px-2 py-1 rounded" data-nim="${data.nim}" data-nama="${data.nama}" data-kelas="${data.kelas}">
+                    ${statusOptions}
+                  </select>
+                </td>
+              </tr>`;
+        });
       }
 
-      if (filterStatus && filterStatus !== status) return;
-
-      const statusOptions = ["", "Hadir", "Telat", "Tidak Hadir", "Izin", "Sakit"].map(opt => {
-        const selected = opt === status ? "selected" : "";
-        return `<option value="${opt}" ${selected}>${opt || "-"}</option>`;
-      }).join("");
-
-      tbody.innerHTML += `
-        <tr>
-          <td>${nama}</td>
-          <td>${kelas}</td>
-          <td>${waktuStr}</td>
-          <td>
-            <select class="status-dropdown bg-white text-black border border-gray-300 px-2 py-1 rounded hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" data-nim="${nim}" data-nama="${nama}" data-kelas="${kelas}">
-              ${statusOptions}
-            </select>
-          </td>
-        </tr>
-      `;
+      addDropdownListeners(filterDate);
+      hitungStatistikAbsensi();
     });
-
-    addDropdownListeners(filterDate);
-    await hitungStatistikAbsensi();
   }
 
   function addDropdownListeners(tanggal) {
@@ -161,7 +223,9 @@
               waktu_scan: waktuNow
             });
           } else {
-            await addDoc(collection(db, "absensi"), {
+            const customDocId = `${nim}_${tanggal}`;
+            const docRef = doc(db, "absensi", customDocId);
+            await setDoc(docRef, {
               nim: nim,
               nama: nama,
               kelas: kelas,
@@ -169,6 +233,7 @@
               status: status,
               tanggal: tanggal
             });
+
           }
 
           alert("Status berhasil diperbarui.");
